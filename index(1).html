@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<title>IBVAP — Intelligent Border Video Analytics Platform</title>
+<meta name="description" content="Real-time person/vehicle detection, tracking, geofencing, ANPR and alerting on existing IP cameras — running entirely on-premises. SIH26187.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0F1A;
+    --surface:#111826;
+    --surface-2:#0C111C;
+    --deep:#050810;
+    --text:#E7ECF3;
+    --text-soft:#96A3B8;
+    --line:#212C40;
+    --accent:#4FA6E8;
+    --accent-strong:#7EC4FF;
+    --green:#6FC98F;
+    --amber:#E0B34F;
+    --red:#E28A82;
+    --grey:#5E6B80;
+    --radius:3px;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  a{color:inherit;}
+
+  /* ---------- top bar ---------- */
+  .topbar{border-bottom:1px solid var(--line); padding:20px 0;}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--serif); font-size:19px; font-weight:600; letter-spacing:0.2px;}
+  .brand .mark{width:28px; height:28px; border:1.5px solid var(--text); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; font-weight:500; flex-shrink:0;}
+  .topnav{display:flex; gap:28px; font-size:14px; color:var(--text-soft);}
+  .topnav a{text-decoration:none; border-bottom:1px solid transparent; transition:border-color .15s, color .15s;}
+  .topnav a:hover{border-color:var(--text-soft); color:var(--text);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 64px;}
+  .hero .wrap{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+  .tags{display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap;}
+  .tag{font-family:var(--mono); font-size:11px; color:var(--text-soft); border:1px solid var(--line); padding:4px 9px; border-radius:2px; background:var(--surface);}
+  h1{font-family:var(--serif); font-weight:600; font-size:42px; line-height:1.16; letter-spacing:-0.3px; margin-bottom:20px; max-width:620px; color:var(--text);}
+  .hero p.lede{font-size:17px; color:var(--text-soft); max-width:480px; margin-bottom:34px;}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:14px;}
+  .btn{font-family:var(--sans); font-size:14.5px; font-weight:600; padding:13px 22px; border-radius:var(--radius); text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; cursor:pointer; transition:transform .12s ease, background .15s ease, color .15s ease;}
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--text); color:var(--deep);}
+  .btn-primary:hover{background:var(--accent-strong); color:var(--deep);}
+  .btn-secondary{background:transparent; color:var(--text); border-color:var(--line);}
+  .btn-secondary:hover{background:var(--surface); border-color:var(--text-soft);}
+  .cta-note{font-size:12.5px; color:var(--grey); font-family:var(--mono);}
+
+  /* ---------- feed mockup (hero visual) ---------- */
+  .feed{background:var(--surface); border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+  .feed-frame{
+    position:relative; aspect-ratio:16/10;
+    background:
+      linear-gradient(180deg, rgba(79,166,232,0.05), transparent 40%),
+      repeating-linear-gradient(100deg, #0D1522 0px, #0D1522 2px, #0F1826 2px, #0F1826 4px);
+    overflow:hidden;
+  }
+  .feed-badge{
+    position:absolute; top:10px; left:10px; font-family:var(--mono); font-size:9.5px;
+    background:var(--deep); border:1px solid var(--line); color:var(--amber);
+    padding:3px 7px; border-radius:2px; letter-spacing:0.4px; z-index:3;
+  }
+  .feed-rec{
+    position:absolute; top:10px; right:10px; font-family:var(--mono); font-size:9.5px;
+    color:var(--text-soft); display:flex; align-items:center; gap:5px; z-index:3;
+  }
+  .feed-rec .dot{width:6px; height:6px; border-radius:50%; background:var(--red);}
+  .bbox{position:absolute; border:1.5px solid var(--green); border-radius:2px;}
+  .bbox.person{top:38%; left:22%; width:13%; height:34%;}
+  .bbox.vehicle{top:52%; left:58%; width:26%; height:22%; border-color:var(--accent-strong);}
+  .bbox .lbl{
+    position:absolute; top:-19px; left:-1px; font-family:var(--mono); font-size:9px;
+    background:var(--green); color:var(--deep); padding:1px 5px; border-radius:1px; white-space:nowrap; font-weight:500;
+  }
+  .bbox.vehicle .lbl{background:var(--accent-strong);}
+  .zone{
+    position:absolute; bottom:0; left:0; width:100%; height:44%;
+    border-top:1.5px dashed rgba(226,138,130,0.55);
+    background:linear-gradient(180deg, transparent, rgba(226,138,130,0.06));
+  }
+  .zone-lbl{position:absolute; bottom:8px; left:10px; font-family:var(--mono); font-size:9px; color:var(--red); letter-spacing:0.3px;}
+  .feed-stats{display:flex; justify-content:space-between; padding:12px 16px; border-top:1px solid var(--line); font-family:var(--mono); font-size:10.5px; color:var(--text-soft); background:var(--surface-2);}
+  .feed-stats b{color:var(--text); font-weight:500;}
+
+  /* ---------- section shell ---------- */
+  section{padding:56px 0;}
+  .rule{border-top:1px solid var(--line);}
+  .section-eyebrow{font-family:var(--mono); font-size:11.5px; color:var(--accent); margin-bottom:10px;}
+  h2{font-family:var(--serif); font-size:28px; font-weight:600; letter-spacing:-0.2px; margin-bottom:14px; max-width:620px; color:var(--text);}
+  .section-lede{font-size:15px; color:var(--text-soft); max-width:620px; margin-bottom:36px;}
+
+  /* ---------- honest scope cards ---------- */
+  .scope-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .scope-card{border:1px solid var(--line); border-radius:4px; padding:20px; background:var(--surface);}
+  .scope-card .claim{font-family:var(--mono); font-size:10.5px; color:var(--grey); text-decoration:line-through; margin-bottom:6px;}
+  .scope-card h3{font-size:15px; font-weight:600; margin-bottom:8px; color:var(--text);}
+  .scope-card p{font-size:13px; color:var(--text-soft);}
+  .scope-card .real{font-family:var(--mono); font-size:10.5px; color:var(--green); margin-top:10px; display:block;}
+
+  /* ---------- capability list ---------- */
+  .cat-list{display:grid; grid-template-columns:1fr 1fr; column-gap:40px; row-gap:0; border-top:1px solid var(--line);}
+  .cat-item{display:flex; gap:14px; padding:16px 0; border-bottom:1px solid var(--line);}
+  .cat-num{font-family:var(--mono); font-size:12px; color:var(--grey); padding-top:2px; flex-shrink:0; width:22px;}
+  .cat-item h4{font-size:14.5px; font-weight:600; margin-bottom:3px; color:var(--text);}
+  .cat-item p{font-size:13px; color:var(--text-soft);}
+
+  /* ---------- performance stat strip ---------- */
+  .stat-strip{display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+  .stat{padding:20px 18px; background:var(--surface); border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .n{font-family:var(--serif); font-size:26px; font-weight:600; color:var(--accent-strong); margin-bottom:4px;}
+  .stat .l{font-size:11.5px; color:var(--text-soft);}
+  .stat-note{font-family:var(--mono); font-size:11px; color:var(--grey); margin-top:14px;}
+
+  /* ---------- try it steps ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .step{border-left:2px solid var(--text-soft); padding-left:16px;}
+  .step .k{font-family:var(--mono); font-size:11px; color:var(--grey); margin-bottom:8px;}
+  .step h4{font-size:15px; font-weight:600; margin-bottom:6px; color:var(--text);}
+  .step p{font-size:13.5px; color:var(--text-soft); margin-bottom:10px;}
+  .step a.inline{font-size:13px; color:var(--accent-strong); text-decoration:underline; text-underline-offset:2px;}
+  .code-block{
+    font-family:var(--mono); font-size:11.5px; line-height:1.7; color:var(--text-soft);
+    background:var(--surface-2); border:1px solid var(--line); border-radius:3px; padding:14px 16px;
+    margin-top:8px; overflow-x:auto; white-space:pre;
+  }
+  .code-block .cmt{color:var(--grey);}
+
+  /* ---------- architecture strip ---------- */
+  .arch-strip{display:flex; align-items:stretch; gap:0; border:1px solid var(--line); border-radius:4px; overflow:hidden;}
+  .arch-step{flex:1; padding:18px 16px; background:var(--surface); border-right:1px solid var(--line);}
+  .arch-step:last-child{border-right:none;}
+  .arch-step .k{font-family:var(--mono); font-size:10px; color:var(--grey); margin-bottom:6px;}
+  .arch-step h4{font-size:13px; font-weight:600; line-height:1.3; color:var(--text);}
+  .arch-step p{font-size:11.5px; color:var(--text-soft); margin-top:4px;}
+
+  /* ---------- final CTA band ---------- */
+  .band{background:var(--deep); color:var(--text); padding:52px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .band h2{color:var(--text); max-width:none;}
+  .band .section-eyebrow{color:var(--accent-strong);}
+  .band .section-lede{color:var(--text-soft); max-width:520px;}
+  .link-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:28px;}
+  .link-card{border:1px solid var(--line); border-radius:3px; padding:14px 16px; text-decoration:none; display:flex; justify-content:space-between; align-items:center; transition:border-color .15s, background .15s; background:var(--surface-2);}
+  .link-card:hover{border-color:var(--accent); background:var(--surface);}
+  .link-card .lc-label{font-size:13.5px; font-weight:600; color:var(--text);}
+  .link-card .lc-sub{font-family:var(--mono); font-size:10.5px; color:var(--grey); margin-top:2px;}
+  .link-card .lc-arrow{font-family:var(--mono); font-size:14px; color:var(--text-soft);}
+
+  /* ---------- footer ---------- */
+  footer{padding:28px 0; border-top:1px solid var(--line);}
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;}
+  footer p{font-size:12.5px; color:var(--grey); font-family:var(--mono);}
+
+  @media (max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .scope-grid{grid-template-columns:1fr;}
+    .cat-list{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .stat-strip{grid-template-columns:1fr 1fr;}
+    .arch-strip{flex-direction:column;}
+    .arch-step{border-right:none; border-bottom:1px solid var(--line);}
+    .arch-step:last-child{border-bottom:none;}
+    .link-grid{grid-template-columns:1fr;}
+    h1{font-size:32px;}
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="mark">I</span>IBVAP</div>
+    <nav class="topnav">
+      <a href="#scope">Honest scope</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#try-it">Try it</a>
+      <a href="#links">Links</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="tags">
+        <span class="tag">SIH26187</span>
+        <span class="tag">MHA / SSB</span>
+        <span class="tag">Working Local Prototype</span>
+      </div>
+      <h1>Turns any existing IP camera into a smart border sensor.</h1>
+      <p class="lede">Real-time person &amp; vehicle detection, persistent tracking, polygon geofencing, ANPR, and instant evidence-backed alerts — running entirely on-premises. No proprietary smart-camera hardware required.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://ivap.vercel.app/" target="_blank" rel="noopener">Open deployed prototype</a>
+        <a class="btn btn-secondary" href="https://drive.google.com/uc?export=download&id=19RV7GQKs9Gv1dAdo9GOZ5Iwn38JePeyG" download>Download sample feeds</a>
+      </div>
+      <p class="cta-note">// login: admin / ibvap-admin-2026 — demo credentials, prototype only</p>
+    </div>
+
+    <div class="feed" aria-hidden="true">
+      <div class="feed-frame">
+        <span class="feed-badge">SIMULATED FEED</span>
+        <span class="feed-rec"><span class="dot"></span>LIVE</span>
+        <div class="bbox person"><span class="lbl">person 0.94</span></div>
+        <div class="bbox vehicle"><span class="lbl">vehicle 0.88</span></div>
+        <div class="zone"><span class="zone-lbl">ZONE: CRITICAL · dwell 4.2s</span></div>
+      </div>
+      <div class="feed-stats">
+        <span>FPS <b>8.1</b></span>
+        <span>LATENCY <b>62ms</b></span>
+        <span>CAM <b>2 / 2 live</b></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="rule"></div>
+
+<section id="scope">
+  <div class="wrap">
+    <div class="section-eyebrow">// honest scope</div>
+    <h2>Labeled honestly, not oversold.</h2>
+    <p class="section-lede">The prototype says exactly what it is, in the UI itself — not just in the docs. If something's a placeholder or a simplification, it's marked as one.</p>
+    <div class="scope-grid">
+      <div class="scope-card">
+        <div class="claim">"Hyperledger Fabric audit trail"</div>
+        <h3>What it actually is</h3>
+        <p>A real SHA-256 hash-chained audit ledger with a verify endpoint — tamper-evident, just not a full permissioned-blockchain stack.</p>
+        <span class="real">/api/alerts/audit/verify</span>
+      </div>
+      <div class="scope-card">
+        <div class="claim">"Facial recognition"</div>
+        <h3>What it actually is</h3>
+        <p>Face detection only (Haar cascade), no watchlist matching yet — the database field for it already exists as the hook for later.</p>
+        <span class="real">matched_watchlist_id (unused)</span>
+      </div>
+      <div class="scope-card">
+        <div class="claim">"Live CCTV feeds"</div>
+        <h3>What it actually is</h3>
+        <p>Recorded video files standing in for cameras, clearly badged in the UI. Swap in an <code>rtsp://</code> source and the identical pipeline runs, labeled accordingly.</p>
+        <span class="real">SIMULATED FEED → RTSP, zero code changes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="capabilities">
+  <div class="wrap">
+    <div class="section-eyebrow">// what's actually running</div>
+    <h2>Real detection, real tracking, real persistence.</h2>
+    <p class="section-lede">Every piece below is implemented and tested, not stubbed — including the auth layer and the audit trail.</p>
+    <div class="cat-list">
+      <div class="cat-item"><span class="cat-num">01</span><div><h4>Person &amp; vehicle detection</h4><p>YOLOv11n running real inference on GPU, not a mock.</p></div></div>
+      <div class="cat-item"><span class="cat-num">02</span><div><h4>Persistent object tracking</h4><p>ByteTrack assigns and holds identity across frames.</p></div></div>
+      <div class="cat-item"><span class="cat-num">03</span><div><h4>Polygon geofencing</h4><p>Shapely-based zones with real enter/dwell-time transitions.</p></div></div>
+      <div class="cat-item"><span class="cat-num">04</span><div><h4>ANPR</h4><p>EasyOCR with plate-format validation, tested against malformed reads.</p></div></div>
+      <div class="cat-item"><span class="cat-num">05</span><div><h4>Alerts with evidence</h4><p>Severity-aware policy with dedup and a night-boost, snapshot + clip attached.</p></div></div>
+      <div class="cat-item"><span class="cat-num">06</span><div><h4>JWT + RBAC auth</h4><p>Tested against JWT tampering and role-ordering edge cases.</p></div></div>
+      <div class="cat-item"><span class="cat-num">07</span><div><h4>Hash-chain audit verification</h4><p>Tamper detection on the alert audit trail, independently testable.</p></div></div>
+      <div class="cat-item"><span class="cat-num">08</span><div><h4>Live system metrics</h4><p>FPS and per-frame latency shown on the System screen — measured, not hardcoded.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <div class="section-eyebrow">// measured, not estimated</div>
+    <h2>Performance on real dev hardware.</h2>
+    <div class="stat-strip">
+      <div class="stat"><div class="n">~8</div><div class="l">FPS per camera, target config</div></div>
+      <div class="stat"><div class="n">20–130ms</div><div class="l">end-to-end per-frame latency</div></div>
+      <div class="stat"><div class="n">2 / 2</div><div class="l">cameras + UI + DB, live simultaneously</div></div>
+      <div class="stat"><div class="n">RTX 4050</div><div class="l">6GB dev laptop, no edge hardware needed to demo</div></div>
+    </div>
+    <p class="stat-note">// these numbers come from the System screen at runtime — nothing in this section is a projection</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="try-it">
+  <div class="wrap">
+    <div class="section-eyebrow">// hands-on</div>
+    <h2>Run it yourself.</h2>
+    <p class="section-lede">Windows, no Docker required. Full clean-machine walkthrough is in USER_MANUAL.md in the repo.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="k">STEP 1</div>
+        <h4>One-time setup</h4>
+        <div class="code-block"><span class="cmt">:: venv + deps</span>
+uv venv .venv --python 3.12
+uv pip install -r backend\requirements.txt
+uv pip install torch==2.5.1 torchvision==0.20.1 \
+  --index-url https://download.pytorch.org/whl/cu121</div>
+      </div>
+      <div class="step">
+        <div class="k">STEP 2</div>
+        <h4>Start it</h4>
+        <div class="code-block"><span class="cmt">:: unzip assets/postgresql.zip first</span>
+scripts\start_ibvap.bat</div>
+        <p>Then open localhost:5173 — login: admin / ibvap-admin-2026</p>
+      </div>
+      <div class="step">
+        <div class="k">STEP 3</div>
+        <h4>Verify it's real</h4>
+        <p>Run the test suite yourself — zone transitions, alert policy, ANPR validation, JWT tampering, audit tamper detection.</p>
+        <div class="code-block">.venv\Scripts\python.exe -m pytest backend\tests -q</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <div class="section-eyebrow">// architecture</div>
+    <h2>Edge pipeline to command-center UI.</h2>
+    <div class="arch-strip">
+      <div class="arch-step"><div class="k">01</div><h4>Ingest</h4><p>Video file or rtsp://, identical pipeline</p></div>
+      <div class="arch-step"><div class="k">02</div><h4>Detection + tracking</h4><p>YOLOv11n → ByteTrack</p></div>
+      <div class="arch-step"><div class="k">03</div><h4>Zone + ANPR + alerts</h4><p>Shapely zones, EasyOCR, policy engine</p></div>
+      <div class="arch-step"><div class="k">04</div><h4>Command center</h4><p>FastAPI + PostgreSQL + React/Vite UI</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="band" id="links">
+  <div class="wrap">
+    <div class="section-eyebrow">// everything in one place</div>
+    <h2>Links</h2>
+    <p class="section-lede">Prototype, sample feeds, source, and the project walkthrough.</p>
+    <div class="link-grid">
+      <a class="link-card" href="https://ivap.vercel.app/" target="_blank" rel="noopener">
+        <div><div class="lc-label">Deployed prototype</div><div class="lc-sub">live demo, simulated feeds preloaded</div></div>
+        <span class="lc-arrow">↗</span>
+      </a>
+      <a class="link-card" href="https://drive.google.com/uc?export=download&id=19RV7GQKs9Gv1dAdo9GOZ5Iwn38JePeyG" download>
+        <div><div class="lc-label">Sample video feeds</div><div class="lc-sub">stand-ins for CCTV, swap for rtsp:// anytime</div></div>
+        <span class="lc-arrow">↓</span>
+      </a>
+      <a class="link-card" href="https://github.com/pranjal-is-afk/ibvap" target="_blank" rel="noopener">
+        <div><div class="lc-label">Source code</div><div class="lc-sub">github.com/pranjal-is-afk/ibvap</div></div>
+        <span class="lc-arrow">↗</span>
+      </a>
+      <a class="link-card" href="https://youtu.be/9yPwIwJVRkc" target="_blank" rel="noopener">
+        <div><div class="lc-label">Project video</div><div class="lc-sub">walkthrough</div></div>
+        <span class="lc-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>SIH26187 — MINISTRY OF HOME AFFAIRS / SSB</p>
+    <p>BUILT ON-PREM. LABELED HONESTLY.</p>
+  </div>
+</footer>
+
+</body>
+</html>
