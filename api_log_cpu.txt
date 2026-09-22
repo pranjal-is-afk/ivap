@@ -1,0 +1,152 @@
+INFO:     Started server process [20752]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+Ultralytics 8.3.58 🚀 Python-3.12.14 torch-2.5.1+cu121 CPU (13th Gen Intel Core(TM) i5-13450HX)
+Ultralytics 8.3.58 🚀 Python-3.12.14 torch-2.5.1+cu121 CPU (13th Gen Intel Core(TM) i5-13450HX)
+Ultralytics 8.3.58 🚀 Python-3.12.14 torch-2.5.1+cu121 CPU (13th Gen Intel Core(TM) i5-13450HX)
+YOLO11n summary (fused): 238 layers, 2,616,248 parameters, 0 gradients, 6.5 GFLOPs
+YOLO11n summary (fused): 238 layers, 2,616,248 parameters, 0 gradients, 6.5 GFLOPs
+YOLO11n summary (fused): 238 layers, 2,616,248 parameters, 0 gradients, 6.5 GFLOPs
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: Unknown C++ exception from OpenCV code
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+INFO:     127.0.0.1:50715 - "GET /api/health HTTP/1.1" 200 OK
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: invalid vector<T> subscript
+source assets/videos/street.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/videoplayback.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/videoplayback.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/street.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/street.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/videoplayback.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/videoplayback.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/street.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/street.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/street.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/videoplayback.mp4 stalled; recovering
+source assets/videos/street.mp4 stalled; recovering
+face handling failed
+Traceback (most recent call last):
+  File "C:\Users\pranj\OneDrive\Documents\Project\SIH Project 1\IVAP_Freebuff\backend\app\pipeline\engine.py", line 575, in maybe_faces
+    rects, levels, weights = cascade.detectMultiScale3(
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+cv2.error: OpenCV(4.11.0) d:\a\opencv-python\opencv-python\opencv\modules\objdetect\src\cascadedetect.hpp:46: error: (-215:Assertion failed) 0 <= scaleIdx && scaleIdx < (int)scaleData->size() in function 'cv::FeatureEvaluator::getScaleData'
+
+source assets/videos/videoplayback.mp4 stalled; recovering

@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-ink-950 text-slate-300 font-sans antialiased;
+  background-image:
+    linear-gradient(rgba(26, 33, 44, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 33, 44, 0.55) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #0b0e13;
+}
+*::-webkit-scrollbar-thumb {
+  background: #2a3342;
+  border-radius: 6px;
+  border: 2px solid #0b0e13;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #3d4959;
+}
+
+@layer components {
+  .panel {
+    @apply bg-ink-900/90 border border-ink-700 rounded;
+  }
+  .panel-header {
+    @apply flex items-center justify-between px-3 h-9 border-b border-ink-700 bg-ink-850;
+  }
+  .panel-title {
+    @apply font-mono text-2xs uppercase tracking-[0.18em] text-slate-400;
+  }
+  .kbd {
+    @apply font-mono text-2xs px-1.5 py-0.5 rounded bg-ink-800 border border-ink-600 text-slate-400;
+  }
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-2.5 h-7 rounded font-mono text-2xs uppercase tracking-wider
+      border border-ink-600 bg-ink-800 text-slate-300 hover:bg-ink-700 hover:border-ink-500
+      disabled:opacity-40 disabled:cursor-not-allowed transition-colors;
+  }
+  .btn-danger {
+    @apply border-red-900/60 text-red-300 hover:bg-red-950/40;
+  }
+  .btn-primary {
+    @apply bg-sky-900/40 border-sky-800/70 text-sky-200 hover:bg-sky-800/50;
+  }
+  .input {
+    @apply bg-ink-950 border border-ink-600 rounded h-7 px-2 font-mono text-xs text-slate-200
+      focus:outline-none focus:border-sky-700 focus:ring-1 focus:ring-sky-900;
+  }
+  .table-row {
+    @apply border-b border-ink-800/70 hover:bg-ink-850/60;
+  }
+}

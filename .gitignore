@@ -1,0 +1,34 @@
+# --- python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# --- runtime data (never commit)
+db/data/
+db/logfile
+evidence/
+assets/pgsql/
+assets/models/
+assets/videos/*.mp4
+assets/postgresql.zip
+yolo11n.pt
+
+# --- logs & markers
+*.log
+api_log.txt
+frontend_log.txt
+install_progress.txt
+install_done.marker
+pg_unzip.marker
+pg_unzip_log.txt
+pg_setup_log.txt
+logs_*.txt
+
+# --- env (contains only local dev secrets; keep template)
+.env
